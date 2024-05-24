@@ -10,7 +10,6 @@ use GuzzleHttp\Exception\ClientException;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
-use JetBrains\PhpStorm\NoReturn;
 
 class WeatherAPIClient
 {
@@ -76,10 +75,10 @@ class WeatherAPIClient
     private function fixExceptionMessage(Exception $e): ?string
     {
         return match ($e->getCode()) {
-            401 => 'Error with Fin System token',
-            404 => 'Fin System endpoint not found',
-            500 => 'Server error in Fin System',
-            default => 'Something went wrong with Fin System',
+            401 => 'Error with Weather client token',
+            404 => 'Weather client endpoint not found',
+            500 => 'Server error in Weather client',
+            default => 'Something went wrong with Weather client',
         };
     }
 }

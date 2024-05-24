@@ -3,12 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 
 class HourlyWeatherInformationByCity extends Model
 {
+    use HasFactory;
+
     protected $table = 'hourly_weather_information_by_city';
     protected $fillable = [
         'temp_c', 'temp_f', 'condition', 'wind_mph', 'wind_kph', 'localtime',

@@ -1,8 +1,5 @@
 <?php
 
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\TestController;
 use App\Http\Controllers\WeatherController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,7 +13,10 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::group(['middleware' => 'weather'], function () {
+    Route::get('weather/{city}', [WeatherController::class, 'show']);
+    Route::get('daily-weather/{city}', [WeatherController::class, 'showByDate']);
+});
 
-Route::get('weather/{city}', [WeatherController::class, 'show']);
-Route::get('daily-weather/{city}', [WeatherController::class, 'showByDate']);
+
 
