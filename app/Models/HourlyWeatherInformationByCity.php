@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 
 class HourlyWeatherInformationByCity extends Model
 {
@@ -14,12 +16,21 @@ class HourlyWeatherInformationByCity extends Model
     ];
 
     protected $casts = [
-        'condition' => 'json',
-//        'localtime' => 'date'
+        'condition' => 'json'
     ];
 
     public function cities(): BelongsTo
     {
         return $this->belongsTo(City::class, 'city_id');
+    }
+
+    public function scopeByDay(Builder $query, Carbon $date):  Builder
+    {
+        return $query->whereDay('created_at', '=', $date);
+    }
+
+    public function scopeWhereCity(Builder $query, int $cityId):  Builder
+    {
+        return $query->where('city_id', $cityId);
     }
 }
